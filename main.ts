@@ -60,7 +60,7 @@ export default class StreamAsyncIterable<T> {
     const self = this;
     return {
       next(): Promise<{ done: boolean; value?: T }> {
-        if (self._done) {
+        if (self.buffer.length <= 0 && self._done) {
           return Promise.resolve({ done: true });
         }
         if (self.buffer.length) {
